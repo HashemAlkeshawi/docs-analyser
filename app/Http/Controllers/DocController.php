@@ -7,6 +7,7 @@ use App\Models\Doc;
 use Smalot\PdfParser\Parser;
 use App\Services\DocumentClassifier;
 use App\Services\DocumentTitleExtractor;
+use App\Services\DocumentContentExtractor;
 
 class DocController extends Controller
 {
@@ -47,30 +48,8 @@ class DocController extends Controller
                 $generatedTitle = $titleExtractor->extract($file, $fileType) ?? $title;
                 $content = null;
 
-                // Extract text content for search (basic, for demo)
-                if (in_array($fileType, ['txt'])) {
-                    $content = file_get_contents($file->getRealPath());
-                } elseif ($fileType === 'pdf') {
-                    // Optionally extract all text for search
-                    try {
-                        $parser = new \Smalot\PdfParser\Parser();
-                        $pdf = $parser->parseFile($file->getRealPath());
-                        $content = $pdf->getText();
-                    } catch (\Exception $e) {}
-                } elseif (in_array($fileType, ['doc', 'docx'])) {
-                    try {
-                        $phpWord = \PhpOffice\PhpWord\IOFactory::load($file->getRealPath());
-                        $text = '';
-                        foreach ($phpWord->getSections() as $section) {
-                            foreach ($section->getElements() as $element) {
-                                if (method_exists($element, '__toString')) {
-                                    $text .= (string) $element . "\n";
-                                }
-                            }
-                        }
-                        $content = $text;
-                    } catch (\Exception $e) {}
-                }
+                $contentExtractor = new DocumentContentExtractor();
+                $content = $contentExtractor->extract($file, $fileType);
 
                 $classifier = new DocumentClassifier();
                 $classification = $classifier->classify($content);

@@ -82,7 +82,7 @@
                                 <span class="uploaded-at" data-utc="{{ $doc->uploaded_at }}"></span>
                             </td>
                             <td>
-                                <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">View</a>
+                                <a href="{{ route('docs.show', $doc->id) }}" class="btn btn-sm btn-outline-primary me-2">View</a>
                                 <form action="{{ route('docs.destroy', $doc->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this document?');">
                                     @csrf
                                     @method('DELETE')

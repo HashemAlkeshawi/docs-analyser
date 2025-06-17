@@ -20,7 +20,8 @@
 <body class="d-flex flex-column min-vh-100">
     <main class="flex-fill d-flex align-items-center justify-content-center">
         <div class="glass container my-5 p-5">
-            <h1 class="h4 fw-bold text-primary mb-4">Viewing: {{ $doc->generated_name ?? $doc->title }}</h1>
+            <h1 class="h3 fw-bold text-primary mb-2">Title: {{ $doc->generated_name ?? '-' }}</h1>
+            <h2 class="h5 fw-normal text-secondary mb-4">File Name: {{ $doc->title ?? '-' }}</h2>
             <div class="mb-3">
                 <span class="badge bg-secondary me-2">Type: {{ strtoupper($doc->file_type) }}</span>
                 <span class="badge bg-info text-dark me-2">Classification: {{ $doc->classification ?? 'Unclassified' }}</span>
