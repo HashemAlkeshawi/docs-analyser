@@ -101,7 +101,8 @@
                 </div>
             @endif
             <div class="mt-4 text-center">
-                <a href="/" class="text-primary text-decoration-underline small">&larr; Back to Home</a>
+                <a href="/" class="text-primary text-decoration-underline small me-3">&larr; Back to Home</a>
+                <a href="{{ route('docs.create') }}" class="btn btn-success btn-sm fw-bold">+ Upload More</a>
             </div>
         </div>
     </main>

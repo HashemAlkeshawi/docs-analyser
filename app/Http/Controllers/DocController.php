@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Doc;
 use Smalot\PdfParser\Parser;
+use App\Services\DocumentClassifier;
+use App\Services\DocumentTitleExtractor;
 
 class DocController extends Controller
 {
@@ -20,68 +22,6 @@ class DocController extends Controller
     {
         //
         return view('docs.upload');
-    }
-
-    /**
-     * Extract a generated title from a file (PDF, DOC, DOCX).
-     */
-    private function extractGeneratedTitle($file, $fileType)
-    {
-        if ($fileType === 'pdf') {
-            try {
-                $parser = new Parser();
-                $pdf = $parser->parseFile($file->getRealPath());
-    
-                $text = $pdf->getText();
-                return str()->limit(trim(strtok($text, "\n")), 60);
-            } catch (\Exception $e) {
-                return 'no title';
-            }
-        } elseif (in_array($fileType, ['doc', 'docx'])) {
-            try {
-                $phpWord = \PhpOffice\PhpWord\IOFactory::load($file->getRealPath());
-                $sections = $phpWord->getSections();
-                foreach ($sections as $section) {
-                    $elements = $section->getElements();
-                    foreach ($elements as $element) {
-                        // Use __toString() if available, otherwise skip
-                        if (method_exists($element, '__toString')) {
-                            $text = (string) $element;
-                            if (trim($text)) {
-                                return str()->limit(trim(strtok($text, "\n")), 60);
-                            }
-                        }
-                    }
-                }
-            } catch (\Exception $e) {
-                return 'no title';
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Predefined classification tree and rule-based classifier.
-     */
-    private $classificationTree = [
-        'Finance' => ['invoice', 'payment', 'receipt', 'budget', 'tax'],
-        'HR' => ['contract', 'policy', 'employee', 'recruitment', 'salary'],
-        'Projects' => ['project', 'plan', 'report', 'milestone', 'timeline'],
-        'Meetings' => ['meeting', 'minutes', 'agenda', 'attendance'],
-        'Legal' => ['agreement', 'nda', 'law', 'legal', 'compliance'],
-    ];
-
-    private function classifyDocument($content)
-    {
-        $content = strtolower($content ?? '');
-        foreach ($this->classificationTree as $category => $keywords) {
-            foreach ($keywords as $keyword) {
-                if (str_contains($content, $keyword)) {
-                    return $category;
-                }
-            }
-        }
-        return 'Unclassified';
     }
 
     /**
@@ -103,7 +43,8 @@ class DocController extends Controller
                 $fileType = $file->getClientOriginalExtension();
                 $size = $file->getSize();
                 $title = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $generatedTitle = $this->extractGeneratedTitle($file, $fileType) ?? $title;
+                $titleExtractor = new DocumentTitleExtractor();
+                $generatedTitle = $titleExtractor->extract($file, $fileType) ?? $title;
                 $content = null;
 
                 // Extract text content for search (basic, for demo)
@@ -131,14 +72,15 @@ class DocController extends Controller
                     } catch (\Exception $e) {}
                 }
 
-                $classification = $this->classifyDocument($content);
+                $classifier = new DocumentClassifier();
+                $classification = $classifier->classify($content);
 
                 $doc = Doc::create([
                     'title' => $title,
                     'generated_name' => $generatedTitle,
                     'file_path' => 'uploads/' . $filename,
                     'content' => $content,
-                    'classification' => $classification, // Set this based on your logic/tree
+                    'classification' => $classification,
                     'file_type' => $fileType,
                     'size' => $size,
                     'uploaded_at' => now(),
@@ -152,29 +94,6 @@ class DocController extends Controller
             ->with('highlighted_docs', $highlighted);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage (soft delete).
