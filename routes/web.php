@@ -32,3 +32,7 @@ Route::get('/run-migrations', function () {
     Artisan::call('migrate', ['--force' => true]);
     return 'Migrations run successfully!';
 });
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link', ['--force' => true]);
+    return 'link run successfully!';
+});
