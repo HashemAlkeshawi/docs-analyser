@@ -113,4 +113,13 @@ class DocController extends Controller
         $docs = Doc::orderBy('generated_name')->get();
         return view('docs.index', ['docs' => $docs]);
     }
+
+    /**
+     * Display the specified resource in-app (viewer).
+     */
+    public function show($id)
+    {
+        $doc = Doc::findOrFail($id);
+        return view('docs.show', compact('doc'));
+    }
 }

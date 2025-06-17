@@ -67,18 +67,23 @@
             </div>
         </div>
     </main>
-    <footer class="w-100 py-4 bg-light border-top mt-auto">
+    <footer class="w-100 py-4 bg-white border-top mt-auto shadow-sm">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start fw-semibold text-secondary">
-                    <span class="badge bg-primary me-2">HA</span>Hashem Alkeshawi <span class="text-muted">| ID: 120190191</span>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <span class="fw-bold text-primary">Cloud &amp; Distributed Systems (Required Course)</span><br>
+                    <span class="text-secondary">Project by:</span>
+                    <span class="badge bg-primary ms-2">Hashem Alkeshawi</span>
+                    <span class="badge bg-light text-dark border ms-2">ID: 120190191</span>
+                    <span class="badge bg-success ms-2">Mohammed Abushamalla</span>
+                    <span class="badge bg-light text-dark border ms-2">ID: 120200000</span>
                 </div>
-                <div class="col-md-6 text-center text-md-end fw-semibold text-secondary">
-                    <span class="badge bg-success me-2">MA</span>Mohammed Abushamalla <span class="text-muted">| ID: 120200000</span>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="fst-italic text-secondary">Proud builders of this course project</span>
                 </div>
             </div>
             <div class="text-center text-muted small mt-2">
-                &copy; {{ date('Y') }} Cloud Document Analytics &mdash; Empowering your academic journey.
+                &copy; {{ date('Y') }} Cloud Document Analytics &mdash; All rights reserved.
             </div>
         </div>
     </footer>
