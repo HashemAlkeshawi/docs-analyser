@@ -28,12 +28,18 @@
             <h1 class="display-6 fw-bold text-primary text-center mb-4">
                 <span class="me-2">📂</span>Upload Your Documents
             </h1>
-            <form action="{{ route('docs.store') }}" method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 500px;">
+            <form id="uploadForm" action="{{ route('docs.store') }}" method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 500px;">
                 @csrf
                 <div class="mb-4">
                     <label for="documents" class="form-label fw-semibold">Select Word or PDF files</label>
                     <input class="form-control form-control-lg" type="file" id="documents" name="documents[]" accept=".pdf,.doc,.docx" multiple required>
                     <div class="form-text">You can select multiple files.</div>
+                </div>
+                <div class="mb-3" id="progressWrapper" style="display:none;">
+                    <label for="uploadProgress" class="form-label">Uploading...</label>
+                    <div class="progress">
+                        <div id="uploadProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">0%</div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
                     ⬆️ Upload
@@ -65,5 +71,41 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        var progressWrapper = document.getElementById('progressWrapper');
+        var progressBar = document.getElementById('uploadProgress');
+        progressWrapper.style.display = 'block';
+        xhr.upload.addEventListener('progress', function(e) {
+            if (e.lengthComputable) {
+                var percent = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = percent + '%';
+                progressBar.textContent = percent + '%';
+            }
+        });
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    progressBar.classList.remove('progress-bar-animated');
+                    progressBar.classList.add('bg-success');
+                    progressBar.textContent = 'Upload Complete!';
+                    setTimeout(function() { window.location.href = '/docs'; }, 1000);
+                } else {
+                    progressBar.classList.remove('progress-bar-animated');
+                    progressBar.classList.add('bg-danger');
+                    progressBar.textContent = 'Upload Failed';
+                }
+            }
+        };
+        xhr.open('POST', form.action, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('input[name="_token"]').value);
+        xhr.send(formData);
+    });
+    </script>
 </body>
 </html>

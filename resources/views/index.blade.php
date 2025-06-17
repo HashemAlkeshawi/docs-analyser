@@ -39,6 +39,14 @@
             <p class="lead text-secondary mb-5">
                 Effortlessly search, sort, and classify your documents in the cloud with <span class="fw-semibold text-primary">docs-analyser</span>.
             </p>
+            <div class="alert alert-info mx-auto mb-4" style="max-width: 600px;">
+                <strong>Course Project:</strong> This project, <em>Cloud Document Analytics</em>, was developed for the Cloud Computing course at IUG.<br>
+                The following students worked on this project:
+                <ul class="mb-0 mt-2 text-start" style="list-style: disc inside;">
+                    <li><strong>Hashem Nizar Alkeshawi</strong> (ID: 120190191)</li>
+                    <li><strong>Mohammed Ziad Abushamalla</strong> (ID: 120200000)</li>
+                </ul>
+            </div>
             <form method="GET" action="" class="mb-4">
                 <div class="input-group mx-auto" style="max-width: 500px;">
                     <input type="text" name="q" class="form-control" placeholder="Search documents..." value="{{ request('q') }}">
@@ -94,15 +102,11 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-                    <span class="fw-bold text-primary">Cloud &amp; Distributed Systems (Required Course)</span><br>
-                    <span class="text-secondary">Project by:</span>
-                    <span class="badge bg-primary ms-2">Hashem Alkeshawi</span>
-                    <span class="badge bg-light text-dark border ms-2">ID: 120190191</span>
-                    <span class="badge bg-success ms-2">Mohammed Abushamalla</span>
-                    <span class="badge bg-light text-dark border ms-2">ID: 120200000</span>
+                    <span class="fw-normal text-muted">Cloud &amp; Distributed Systems (Course Project)</span><br>
+                    <span class="text-muted small">By Hashem Alkeshawi (120190191), Mohammed Abushamalla (120200000)</span>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <span class="fst-italic text-secondary">Proud builders of this course project</span>
+                    <span class="fst-italic text-secondary small">Proud builders of this course project</span>
                 </div>
             </div>
             <div class="text-center text-muted small mt-2">

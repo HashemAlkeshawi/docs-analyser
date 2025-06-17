@@ -29,7 +29,7 @@ Route::get('docs-title', [DocController::class, 'indexByTitle'])->name('docs.ind
 Route::get('docs/{doc}/view', [DocController::class, 'show'])->name('docs.show');
 
 Route::get('/run-migrations', function () {
-    Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('migrate:fresh', ['--force' => true]);
     return 'Migrations run successfully!';
 });
 Route::get('/storage-link', function () {

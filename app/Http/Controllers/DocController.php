@@ -8,17 +8,24 @@ use Smalot\PdfParser\Parser;
 use App\Services\DocumentClassifier;
 use App\Services\DocumentTitleExtractor;
 use App\Services\DocumentContentExtractor;
+use App\Services\DocumentSearchService;
 
 class DocController extends Controller
 {
-  
-    public function index()
+
+    public function index(Request $request)
     {
-        $docs = Doc::orderByDesc('uploaded_at')->get();
+        $query = $request->input('q');
+        if ($query) {
+            $searchService = new DocumentSearchService();
+            $docs = $searchService->searchByContent($query);
+        } else {
+            $docs = Doc::orderByDesc('uploaded_at')->get();
+        }
         return view('docs.index', ['docs' => $docs]);
     }
 
-  
+
     public function create()
     {
         //
@@ -87,9 +94,15 @@ class DocController extends Controller
     /**
      * Display a listing of the resource ordered by generated_name (title).
      */
-    public function indexByTitle()
+    public function indexByTitle(Request $request)
     {
-        $docs = Doc::orderBy('generated_name')->get();
+        $query = $request->input('q');
+        if ($query) {
+            $searchService = new \App\Services\DocumentSearchService();
+            $docs = $searchService->searchByContent($query)->sortBy('generated_name');
+        } else {
+            $docs = Doc::orderBy('generated_name')->get();
+        }
         return view('docs.index', ['docs' => $docs]);
     }
 
