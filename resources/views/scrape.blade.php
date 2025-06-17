@@ -34,6 +34,19 @@
             </div>
         </div>
     </main>
+    <footer class="w-100 py-4 bg-primary text-white border-top mt-auto shadow-sm">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col text-center">
+                    <span class="fw-bold">Cloud & Distributed Systems (Course Project)</span><br>
+                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushamalla (120200000)</span>
+                </div>
+            </div>
+            <div class="text-center small mt-2">
+                &copy; {{ date('Y') }} Cloud Document Analytics
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.getElementById('scrapeForm').addEventListener('submit', function(e) {

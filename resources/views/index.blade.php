@@ -39,8 +39,8 @@
             <p class="lead text-secondary mb-5">
                 Effortlessly search, sort, and classify your documents in the cloud with <span class="fw-semibold text-primary">docs-analyser</span>.
             </p>
-            <div class="alert alert-info mx-auto mb-4" style="max-width: 600px;">
-                <strong>Course Project:</strong> This project, <em>Cloud Document Analytics</em>, was developed for the Cloud Computing course at IUG.<br>
+            <div class="alert alert-info mx-auto mb-4 text-start" style="max-width: 1000px;">
+                <strong>This Project:</strong> <em>Cloud Document Analytics</em>, was developed for the Cloud Computing course at IUG.<br>
                 The following students worked on this project:
                 <ul class="mb-0 mt-2 text-start" style="list-style: disc inside;">
                     <li><strong>Hashem Nizar Alkeshawi</strong> (ID: 120190191)</li>
@@ -101,19 +101,16 @@
             </div>
         </div>
     </main>
-    <footer class="w-100 py-4 bg-white border-top mt-auto shadow-sm">
+    <footer class="w-100 py-4 bg-primary text-white border-top mt-auto shadow-sm">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-                    <span class="fw-normal text-muted">Cloud &amp; Distributed Systems (Course Project)</span><br>
-                    <span class="text-muted small">By Hashem Alkeshawi (120190191), Mohammed Abushamalla (120200000)</span>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <span class="fst-italic text-secondary small">Proud builders of this course project</span>
+                <div class="col text-center">
+                    <span class="fw-bold">Cloud & Distributed Systems (Course Project)</span><br>
+                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushamalla (120200000)</span>
                 </div>
             </div>
-            <div class="text-center text-muted small mt-2">
-                &copy; {{ date('Y') }} Cloud Document Analytics &mdash; All rights reserved.
+            <div class="text-center small mt-2">
+                &copy; {{ date('Y') }} Cloud Document Analytics
             </div>
         </div>
     </footer>
