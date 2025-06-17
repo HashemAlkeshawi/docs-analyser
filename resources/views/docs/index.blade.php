@@ -37,6 +37,12 @@
                     <a href="{{ route('docs.indexByTitle') }}" class="btn btn-outline-primary @if(request()->routeIs('docs.indexByTitle')) active @endif">Sort by Title</a>
                 </div>
             </div>
+            <form method="GET" action="" class="mb-4">
+                <div class="input-group mx-auto" style="max-width: 500px;">
+                    <input type="text" name="q" class="form-control" placeholder="Search documents..." value="{{ request('q') }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
             @if(count($docs) > 0)
                 <div class="table-responsive">
                 <table class="table table-hover align-middle table-bordered rounded-3 overflow-hidden bg-white">

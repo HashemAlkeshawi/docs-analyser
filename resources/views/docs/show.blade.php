@@ -14,7 +14,6 @@
             border-radius: 2rem;
             border: 1px solid rgba(255,255,255,0.18);
         }
-        .highlight { background: yellow; }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -31,13 +30,10 @@
                 <div class="ratio ratio-16x9 mb-4" style="min-height: 500px;">
                     <iframe src="{{ asset('storage/' . $doc->file_path) }}" width="100%" height="100%" style="border:0; min-height:500px;" allowfullscreen></iframe>
                 </div>
-                <div class="alert alert-info">PDF viewing powered by your browser. Highlighting is not available for PDFs in this demo.</div>
             @elseif(in_array($doc->file_type, ['txt', 'doc', 'docx']))
                 <div class="border rounded p-3 bg-light mb-4" id="doc-content" style="white-space: pre-wrap; min-height: 300px; cursor:text;">
                     {{ $doc->content }}
                 </div>
-                <button class="btn btn-warning btn-sm mb-2" onclick="highlightSelection()">Highlight Selection</button>
-                <div class="alert alert-info">Select text and click 'Highlight Selection' to highlight it. (Demo only, not persistent)</div>
             @else
                 <div class="alert alert-warning">Preview not available for this file type.</div>
             @endif
@@ -77,16 +73,6 @@
                 }
             });
         });
-        function highlightSelection() {
-            var sel = window.getSelection();
-            if (!sel.rangeCount) return;
-            var range = sel.getRangeAt(0);
-            if (range.collapsed) return;
-            var span = document.createElement('span');
-            span.className = 'highlight';
-            range.surroundContents(span);
-            sel.removeAllRanges();
-        }
     </script>
 </body>
 </html>

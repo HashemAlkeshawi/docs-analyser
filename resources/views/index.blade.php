@@ -17,6 +17,17 @@
             border-radius: 2rem;
             border: 1px solid rgba(255,255,255,0.18);
         }
+        .hover-shadow:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .feature-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 2px 8px 0 rgba(0,0,0,0.10);
+            z-index: 2;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -28,30 +39,42 @@
             <p class="lead text-secondary mb-5">
                 Effortlessly search, sort, and classify your documents in the cloud with <span class="fw-semibold text-primary">docs-analyser</span>.
             </p>
+            <form method="GET" action="" class="mb-4">
+                <div class="input-group mx-auto" style="max-width: 500px;">
+                    <input type="text" name="q" class="form-control" placeholder="Search documents..." value="{{ request('q') }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
             <div class="row g-4 mb-5">
                 <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm bg-blue-100">
-                        <div class="card-body">
-                            <h2 class="h5 fw-bold text-primary mb-2">📂 Upload Documents</h2>
-                            <p class="text-secondary">Securely store Word and PDF files in the cloud.</p>
+                    <a href="/docs/create" class="text-decoration-none">
+                        <div class="card feature-card h-100 border-0 shadow-sm bg-blue-100">
+                            <div class="card-body">
+                                <h2 class="h5 fw-bold text-primary mb-2">📂 Upload Documents</h2>
+                                <p class="text-secondary">Securely store Word and PDF files in the cloud.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm bg-green-100">
-                        <div class="card-body">
-                            <h2 class="h5 fw-bold text-success mb-2">🔍 Search & Highlight</h2>
-                            <p class="text-secondary">Find documents with specific text and highlight matches.</p>
+                    <a href="/docs" class="text-decoration-none">
+                        <div class="card feature-card h-100 border-0 shadow-sm bg-green-100">
+                            <div class="card-body">
+                                <h2 class="h5 fw-bold text-success mb-2">🔍 Search & Highlight</h2>
+                                <p class="text-secondary">Find documents with specific text and highlight matches.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm bg-warning-subtle">
-                        <div class="card-body">
-                            <h2 class="h5 fw-bold text-warning mb-2">📊 Smart Classification</h2>
-                            <p class="text-secondary">Automatically categorize files using a custom classification tree.</p>
+                    <a href="{{ route('docs.indexByTitle') }}" class="text-decoration-none">
+                        <div class="card feature-card h-100 border-0 shadow-sm bg-warning-subtle">
+                            <div class="card-body">
+                                <h2 class="h5 fw-bold text-warning mb-2">📊 Smart Classification</h2>
+                                <p class="text-secondary">Automatically categorize files using a custom classification tree.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="mb-4">
@@ -63,7 +86,7 @@
                 </button>
             </div>
             <div class="text-secondary small mb-2">
-                Powered by Laravel, Bootstrap, and OpenAI.
+                Build by Laravel and Bootstrap || with the help of GitHub Copilot & OpenAI.
             </div>
         </div>
     </main>
