@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DocController;
 
 /*
@@ -26,3 +27,8 @@ Route::get('docs-title', [DocController::class, 'indexByTitle'])->name('docs.ind
 
 // Route for viewing a single doc in-app
 Route::get('docs/{doc}/view', [DocController::class, 'show'])->name('docs.show');
+
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrations run successfully!';
+});
