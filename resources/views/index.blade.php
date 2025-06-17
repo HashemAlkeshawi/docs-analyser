@@ -92,6 +92,9 @@
                 <button onclick="window.location.href='/docs'" type="button" class="btn btn-lg btn-outline-secondary fw-bold px-5 py-3 shadow-sm">
                     📄 Show All Documents
                 </button>
+                <button onclick="window.location.href='/scrape'" type="button" class="btn btn-lg btn-outline-info fw-bold px-5 py-3 shadow-sm">
+                    🌐 Scrape Documents
+                </button>
             </div>
             <div class="text-secondary small mb-2">
                 Build by Laravel and Bootstrap || with the help of GitHub Copilot & OpenAI.

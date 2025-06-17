@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DocController;
+use App\Http\Controllers\ScrapeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,14 @@ Route::get('docs-title', [DocController::class, 'indexByTitle'])->name('docs.ind
 Route::get('docs/{doc}/view', [DocController::class, 'show'])->name('docs.show');
 
 Route::get('/run-migrations', function () {
-    Artisan::call('migrate:fresh', ['--force' => true]);
+    Artisan::call('migrate', ['--force' => true]);
     return 'Migrations run successfully!';
 });
 Route::get('/storage-link', function () {
     Artisan::call('storage:link', ['--force' => true]);
     return 'link run successfully!';
 });
+Route::post('/scrape-docs', [ScrapeController::class, 'scrape'])->name('scrape.docs');
+Route::get('/scrape', function () {
+    return view('scrape');
+})->name('scrape.form');
