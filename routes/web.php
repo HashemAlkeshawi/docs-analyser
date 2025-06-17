@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/upload', function () {
-    return view('upload');
-})->name('upload');
+
+Route::get('docs/index-by-title', 'App\Http\Controllers\DocController@indexByTitle')->name('docs.indexByTitle');
+Route::resource('docs', 'App\Http\Controllers\DocController')->only([
+    'index',
+    'create',
+    'store',
+    'show',
+    'edit',
+    'update',
+    'destroy'
+]);
