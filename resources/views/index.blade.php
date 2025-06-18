@@ -47,7 +47,7 @@
                     <li><strong>Mohammed Ziad Abushammala</strong> (ID: 120200471)</li>
                 </ul>
             </div>
-            <form method="GET" action="" class="mb-4">
+            <form method="GET" action="{{ route('docs.index') }}" class="mb-4">
                 <div class="input-group mx-auto" style="max-width: 500px;">
                     <input type="text" name="q" class="form-control" placeholder="Search documents..." value="{{ request('q') }}">
                     <button class="btn btn-primary" type="submit">Search</button>
