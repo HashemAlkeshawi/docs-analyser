@@ -16,13 +16,23 @@ class DocController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('q');
+        // Persist flash data for one more request if present
+        if (session('success') || session('highlighted_docs')) {
+            session()->keep(['success', 'highlighted_docs']);
+        }
+        $success = session('success');
+        $highlighted = session('highlighted_docs') ?? [];
         if ($query) {
             $searchService = new DocumentSearchService();
             $docs = $searchService->searchByContent($query);
         } else {
             $docs = Doc::orderByDesc('uploaded_at')->get();
         }
-        return view('docs.index', ['docs' => $docs]);
+        return view('docs.index', [
+            'docs' => $docs,
+            'success' => $success,
+            'highlighted' => $highlighted,
+        ]);
     }
 
 
@@ -97,13 +107,23 @@ class DocController extends Controller
     public function indexByTitle(Request $request)
     {
         $query = $request->input('q');
+        // Persist flash data for one more request if present
+        if (session('success') || session('highlighted_docs')) {
+            session()->keep(['success', 'highlighted_docs']);
+        }
+        $success = session('success');
+        $highlighted = session('highlighted_docs') ?? [];
         if ($query) {
-            $searchService = new \App\Services\DocumentSearchService();
+            $searchService = new DocumentSearchService();
             $docs = $searchService->searchByContent($query)->sortBy('generated_name');
         } else {
             $docs = Doc::orderBy('generated_name')->get();
         }
-        return view('docs.index', ['docs' => $docs]);
+        return view('docs.index', [
+            'docs' => $docs,
+            'success' => $success,
+            'highlighted' => $highlighted,
+        ]);
     }
 
     /**

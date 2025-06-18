@@ -44,7 +44,7 @@
                 The following students worked on this project:
                 <ul class="mb-0 mt-2 text-start" style="list-style: disc inside;">
                     <li><strong>Hashem Nizar Alkeshawi</strong> (ID: 120190191)</li>
-                    <li><strong>Mohammed Ziad Abushamalla</strong> (ID: 120200000)</li>
+                    <li><strong>Mohammed Ziad Abushammala</strong> (ID: 120200471)</li>
                 </ul>
             </div>
             <form method="GET" action="" class="mb-4">
@@ -106,7 +106,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col text-center">
                     <span class="fw-bold">Cloud & Distributed Systems (Course Project)</span><br>
-                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushamalla (120200000)</span>
+                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushammala (120200471)</span>
                 </div>
             </div>
             <div class="text-center small mt-2">

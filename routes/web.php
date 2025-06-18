@@ -29,9 +29,16 @@ Route::get('docs-title', [DocController::class, 'indexByTitle'])->name('docs.ind
 // Route for viewing a single doc in-app
 Route::get('docs/{doc}/view', [DocController::class, 'show'])->name('docs.show');
 
+
+//commands for migrating db on cloud (a turn around cuz I do not have to install heavy Heroku CLI)
 Route::get('/run-migrations', function () {
     Artisan::call('migrate', ['--force' => true]);
     return 'Migrations run successfully!';
+});
+//commands for resetting db on cloud (a turn around cuz I do not have to install heavy Heroku CLI)
+Route::get('/db-reset', function () {
+    Artisan::call('migrate:fresh', ['--force' => true]);
+    return 'Database reset successfully!';
 });
 Route::get('/storage-link', function () {
     Artisan::call('storage:link', ['--force' => true]);

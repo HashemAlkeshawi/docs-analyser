@@ -23,13 +23,13 @@
     <main class="flex-fill d-flex align-items-center justify-content-center">
         <div class="glass container my-5 p-5">
             <h1 class="display-5 fw-bold text-primary text-center mb-4">Available Documents</h1>
-            @if(session('success'))
+            @if($success)
                 <div class="alert alert-success text-center fw-bold">
-                    {{ session('success') }}
+                    {{ $success }}
                 </div>
             @endif
             @php
-                $highlighted = session('highlighted_docs') ?? [];
+                // Use the passed $highlighted variable
             @endphp
             <div class="d-flex justify-content-end mb-3">
                 <div class="btn-group" role="group" aria-label="Sort options">
@@ -117,7 +117,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col text-center">
                     <span class="fw-bold">Cloud & Distributed Systems (Course Project)</span><br>
-                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushamalla (120200000)</span>
+                    <span class="fw-bold">By Hashem Nizar Alkeshawi (120190191) & Mohammed Ziad Abushammala (120200471)</span>
                 </div>
             </div>
             <div class="text-center small mt-2">
